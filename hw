@@ -1,0 +1,80 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class ToDoListApp {
+    private ArrayList<String> tasks;
+    private HashSet<String> uniqueTasks;
+
+    public ToDoListApp() {
+        tasks = new ArrayList<>();
+        uniqueTasks = new HashSet<>();
+    }
+
+    public void addTask(String task) {
+        tasks.add(task);
+        uniqueTasks.add(task);
+        System.out.println("Task added: " + task);
+    }
+
+    public void viewTasks() {
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks found.");
+        } else {
+            System.out.println("Your To-Do List:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println((i + 1) + ". " + tasks.get(i));
+            }
+        }
+    }
+    // Displays unique tasks using the HashSet
+
+
+    public void viewUniqueTasks() {
+        if (uniqueTasks.isEmpty()) {
+            System.out.println("No unique tasks found.");
+        } else {
+            System.out.println("Unique Tasks:");
+            for (String task : uniqueTasks) {
+                System.out.println("- " + task);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        ToDoListApp app = new ToDoListApp();
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n1. Add Task");
+            System.out.println("2. View Tasks");
+            System.out.println("3. View Unique Tasks");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            if (choice == 1) {
+                System.out.print("Enter task: ");
+                String task = sc.nextLine();
+                app.addTask(task);
+
+            } else if (choice == 2) {
+                app.viewTasks();
+
+            } else if (choice == 3) {
+                app.viewUniqueTasks();
+                // uses HashSet feature
+
+            } else if (choice == 4) {
+                System.out.println("Goodbye!");
+                break;
+
+            } else {
+                System.out.println("Invalid option, try again.");
+            }
+        }
+        sc.close();
+    }
+}
